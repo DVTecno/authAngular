@@ -1,0 +1,82 @@
+spring:
+  application:
+    name: Auh Angular
+  profiles:
+    active: dev
+  datasource:
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            timeout: 2000
+  ai:
+    openai:
+      api-key: ${OPENAI_KEY}
+      chat:
+        enabled: true
+        options:
+          model: gpt-4
+          temperature: 0.7
+    vectorstore:
+      pgvector:
+        distance-type: COSINE_DISTANCE
+        index-type: HNSW
+        dimensions: 1536
+        remove-existing-vector-store-table: true
+
+cloudinary:
+  name: "dzmzrbuta"
+  api:
+    key: ${CLOUDINARY_KEY}
+    secret: ${CLOUDINARY_SECRET}
+
+server:
+  port: 8090
+  error:
+    include-message: always
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+
+frontend:
+  url: ${FRONTEND_URL}
+
+backend:
+  url: ${BACKEND_URL}
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# veriff:
+#   api-key: ${VERIFF_KEY}
+#   url: ${VERIFF_URL}
+
+# mercadopago:
+#   access_token: ${MERCADOPAGO_ACCESS_TOKEN}
+#   secret_key: ${MERCADOPAGO_SECRET_KEY}
+#   success_callback_url: ${MERCADOPAGO_SUCCESS_CALLBACK_URL}
+#   failure_callback_url: ${MERCADOPAGO_FAILURE_CALLBACK_URL}
+#   pending_callback_url: ${MERCADOPAGO_PENDING_CALLBACK_URL}
+#   webhook_callback_url: ${MERCADOPAGO_WEBHOOK_CALLBACK_URL}
