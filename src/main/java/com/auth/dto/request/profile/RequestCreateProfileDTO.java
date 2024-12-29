@@ -1,4 +1,4 @@
-package com.auth.dto.customValidation.request.response.auth.profile;
+package com.auth.dto.request.profile;
 
 import lombok.*;
 

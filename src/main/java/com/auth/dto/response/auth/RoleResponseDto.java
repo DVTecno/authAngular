@@ -1,4 +1,4 @@
-package com.auth.dto.customValidation.request.response.auth;
+package com.auth.dto.response.auth;
 
 import java.util.UUID;
 
