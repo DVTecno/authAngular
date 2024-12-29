@@ -1,4 +1,6 @@
 package com.auth.dto.customValidation.request.response.auth;
 
-public record RoleResponseDto() {
+import java.util.UUID;
+
+public record RoleResponseDto(UUID roleId,String name) {
 }

@@ -1,4 +1,27 @@
 package com.auth.dto.customValidation.request.response.auth;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginRequestDto {
+    @Email(message = "invalid email entered")
+    @NotBlank(message = "Email must be required")
+    private String email;
+
+    @NotBlank(message = "Password cannot be empty")
+    @Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "The password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character"
+    )
+    private String password;
 }
