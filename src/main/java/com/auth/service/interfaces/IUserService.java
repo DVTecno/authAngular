@@ -1,7 +1,6 @@
 package com.auth.service.interfaces;
 
-
-
+import com.auth.dto.response.auth.UserResponseDto;
 import com.auth.model.User;
 
 import java.util.List;

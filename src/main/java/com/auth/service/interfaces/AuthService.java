@@ -1,8 +1,8 @@
 package com.auth.service.interfaces;
 
-import com.auth.dto.customValidation.request.auth.RegisterRequestDto;
-import com.auth.dto.customValidation.request.response.auth.AuthResponseDto;
-import com.auth.dto.customValidation.request.response.auth.LoginRequestDto;
+import com.auth.dto.request.auth.LoginRequestDto;
+import com.auth.dto.request.auth.RegisterRequestDto;
+import com.auth.dto.response.auth.AuthResponseDto;
 import com.auth.model.User;
 
 import java.util.UUID;

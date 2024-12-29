@@ -1,5 +1,7 @@
 package com.auth.service.interfaces;
 
+import com.auth.dto.request.profile.RequestCreateProfileDTO;
+import com.auth.dto.response.profile.ResponseProfileDTO;
 import com.auth.model.User;
 
 import java.util.UUID;
