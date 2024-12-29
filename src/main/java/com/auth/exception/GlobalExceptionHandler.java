@@ -43,6 +43,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(ex.getStatusCode())
                 .body(error);
     }
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException ex ,WebRequest request) {
         ErrorResponse error = new ErrorResponse(
