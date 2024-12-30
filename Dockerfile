@@ -17,14 +17,11 @@ RUN sed -i 's/\r$//' mvnw
 
 RUN chmod +x ./mvnw
 
-
 # DESCARGAR LAS DEPENDENCIAS
 RUN ./mvnw dependency:go-offline
 
 # COPIAR EL CODIGO FUENTE DENTRO DEL CONTENEDOR
 COPY ./src /root/src
-
-
 
 # PERMITE EJECUTAR EL INSTALL A PESAR DE NO TENER LAS ENVS. -D SKIP TESTS.
 RUN ./mvnw clean install -DskipTests
