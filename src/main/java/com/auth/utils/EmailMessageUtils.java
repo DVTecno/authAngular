@@ -13,7 +13,7 @@ public final class EmailMessageUtils {
     public static final String WELCOME_TEAM_NAME = "Equipo de Bienvenida";
     public static final String PASSWORD_RECOVERY_TEMPLATE = "password-recovery";
     public static final String CONFIRMATION_TEMPLATE = "confirmation";
-    public static final String LOAN_STATUS_NOTIFICATION_TEMPLATE = "loan-status-notification";
+    public static final String STATUS_NOTIFICATION_TEMPLATE = "status-notification";
     public static final String DEFAULT_USER_NAME = "Usuario";
     private EmailMessageUtils() {
         throw new UnsupportedOperationException("Esta es una clase de utilidad y no debe ser instantiate.");

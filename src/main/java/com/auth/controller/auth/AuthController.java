@@ -31,7 +31,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDto> register (@Valid @RequestBody RegisterRequestDto dto) {
         AuthResponseDto response = authService.register(dto);
-        emailService.sendAccountActivationEmail(dto.getEmail());
+        //emailService.sendAccountActivationEmail(dto.getEmail());
         return ResponseEntity.status(201).body(response);
     }
 
@@ -45,13 +45,13 @@ public class AuthController {
     public ResponseEntity<Void> activateAccount(@RequestParam("token") String token) {
         authService.activateAccount(token);
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("https://financialal.up.railway.app/auth"))
+                .location(URI.create("http://localhost:8090/auth"))
                 .build();
     }
 
     @PostMapping("/generate-token")
     public ResponseEntity<String> generateActivationToken(@RequestBody @Valid EmailRequestDto emailRequestDto) {
-        emailService.sendAccountActivationEmail(emailRequestDto.email());
+        //emailService.sendAccountActivationEmail(emailRequestDto.email());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Token de activación generado y enviado al correo.");
     }

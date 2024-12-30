@@ -189,9 +189,9 @@ public class EmailServiceImpl implements IEmailService {
             context.setVariable("messageBody", messageBody);
             context.setVariable("extraMessage", extraMessage);
             context.setVariable("callToActionMessage", callToActionMessage);
-            context.setVariable("redirectLink", frontendUrl + "/loan/upload-documentation");
+            context.setVariable("redirectLink", frontendUrl + "auth/sign-in");
             context.setVariable("buttonText", buttonText);
-            String htmlContent = templateEngine.process(LOAN_STATUS_NOTIFICATION_TEMPLATE, context);
+            String htmlContent = templateEngine.process(STATUS_NOTIFICATION_TEMPLATE, context);
 
             helper.setText(htmlContent, true);
             javaMailSender.send(message);
@@ -217,7 +217,7 @@ public class EmailServiceImpl implements IEmailService {
             context.setVariable("messageBody", EmailMessageUtils.MESSAGE_BODY);
             context.setVariable("extraMessage", notification);
             context.setVariable("callToActionMessage", EmailMessageUtils.CALL_TO_ACTION_MESSAGE);
-            String htmlContent = templateEngine.process(LOAN_STATUS_NOTIFICATION_TEMPLATE, context);
+            String htmlContent = templateEngine.process(STATUS_NOTIFICATION_TEMPLATE, context);
 
             helper.setText(htmlContent, true);
             javaMailSender.send(message);

@@ -32,7 +32,7 @@ public class SecurityConfig {
             "/api/reset-password",
             "/api/faq/ask",
             "/api/auth/activate",
-            "/api/auth/generate-token"
+            "/api/auth/generate-token",
     };
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -68,5 +68,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 }

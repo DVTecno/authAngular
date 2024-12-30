@@ -17,12 +17,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Auth API",
-                description = "Auh API for user authentication and authorization.",
+                description = "API for managing user authentication and authorization.",
                 version = "1.0.0",
                 contact = @Contact(
-                        name = "API Support",
+                        name = "Auth Team",
                         url = "https://login-clase.up.railway.app/dashboard",
-                        email = "api.sup@gmail.com"
+                        email = "auth.sup@gmail.com"
                 ),
                 license = @License(
                         name = "Standard Software Use License",
@@ -62,3 +62,4 @@ public class OpenApiConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/openapi/");
     }
 }
+
