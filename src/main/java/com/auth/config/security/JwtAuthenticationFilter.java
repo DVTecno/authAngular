@@ -35,7 +35,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         if (tokenBlacklistRepository.findByToken(token).isPresent()) {
-            filterChain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Sesión cerrada");
+            response.getWriter().flush();
             return;
         }
         username = jwtService.getUsernameFromToken(token);
