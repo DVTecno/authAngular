@@ -61,6 +61,8 @@ public class User extends Auditable implements UserDetails {
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
+    private String refreshToken;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
@@ -92,5 +94,4 @@ public class User extends Auditable implements UserDetails {
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
     }
-
 }

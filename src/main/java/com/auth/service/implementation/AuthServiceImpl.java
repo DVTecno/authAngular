@@ -123,9 +123,13 @@ public class AuthServiceImpl implements AuthService {
         Set<RoleResponseDto> roles = user.getRoles().stream()
                 .map(r-> new RoleResponseDto(r.getRoleId(),r.getName()))
                 .collect(Collectors.toSet());
-        //UserResponseDto userR = new UserResponseDto(user.getUserId(),user.getEmail(),user.getName(),user.getLastname(),user.getDni(),roles);
+
         String token = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
+
+        user.setRefreshToken(refreshToken);
+        userRepository.save(user);
+
         return new AuthResponseDto(userR,token);
     }
 
