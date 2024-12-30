@@ -6,7 +6,6 @@ import com.auth.dto.request.auth.LoginRequestDto;
 import com.auth.dto.request.auth.RegisterRequestDto;
 import com.auth.dto.response.TokenValidationResponseDTO;
 import com.auth.dto.response.auth.AuthResponseDto;
-import com.auth.dto.response.auth.RoleResponseDto;
 import com.auth.dto.response.auth.UserResponseDto;
 import com.auth.exception.AccountActivationException;
 import com.auth.exception.BadRequestException;
@@ -27,9 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
