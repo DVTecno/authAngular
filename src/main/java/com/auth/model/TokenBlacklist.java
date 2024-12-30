@@ -6,7 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Data
 @Entity
@@ -15,5 +16,5 @@ public class TokenBlacklist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String token;
-    private LocalDateTime expiryDate;
+    private Date expiryDate;
 }

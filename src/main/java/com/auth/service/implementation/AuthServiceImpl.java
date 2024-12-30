@@ -9,9 +9,11 @@ import com.auth.dto.response.auth.AuthResponseDto;
 import com.auth.dto.response.auth.UserResponseDto;
 import com.auth.exception.*;
 import com.auth.model.Role;
+import com.auth.model.TokenBlacklist;
 import com.auth.model.User;
 import com.auth.repository.IRoleRepository;
 import com.auth.repository.IUserRepository;
+import com.auth.repository.TokenBlacklistRepository;
 import com.auth.service.interfaces.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +38,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final TokenBlacklistRepository tokenBlacklistRepository;
 
     @Override
     public AuthResponseDto login(LoginRequestDto dto) {
@@ -221,7 +224,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional
     @Override
-    public void logout(String refreshToken) {
+    public void logout(String refreshToken, String accessToken) {
         String username = jwtService.getUsernameFromToken(refreshToken);
 
         User user = userRepository.findUserByEmail(username)
@@ -229,5 +232,10 @@ public class AuthServiceImpl implements AuthService {
 
         user.setRefreshToken(null);
         userRepository.save(user);
+
+        TokenBlacklist tokenBlacklist = new TokenBlacklist();
+        tokenBlacklist.setToken(accessToken);
+        tokenBlacklist.setExpiryDate(jwtService.getExpiration(accessToken));
+        tokenBlacklistRepository.save(tokenBlacklist);
     }
 }

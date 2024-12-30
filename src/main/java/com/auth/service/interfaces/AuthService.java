@@ -15,5 +15,5 @@ public interface AuthService {
     void activateAccount(String token);
     String generateActivationToken(String email);
     AuthResponseDto refreshToken(String refreshToken);
-    void logout(String refreshToken);
+    void logout(String refreshToken , String accessToken);
 }
