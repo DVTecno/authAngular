@@ -88,7 +88,7 @@ public class JwtService {
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
 
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && isTokenExpired(token));
     }
 
     public Date getExpiration(String token) {
@@ -96,7 +96,7 @@ public class JwtService {
     }
 
     public boolean isTokenExpired(String token) {
-        return getExpiration(token).before(new Date());
+        return !getExpiration(token).before(new Date());
     }
 
     public String createTokenConfirmation(String username) {
@@ -118,11 +118,29 @@ public class JwtService {
     public boolean isActivationTokenValid(String token) {
         try {
             String purpose = getClaim(token, claims -> (String) claims.get("purpose"));
-            return "account_activation".equals(purpose) && !isTokenExpired(token);
+            return "account_activation".equals(purpose) && isTokenExpired(token);
         } catch (Exception e) {
             log.error("Error al validar el token de activación: {}", e.getMessage());
             return false;
         }
     }
 
+    public String createRefreshToken(String username, Map<String, Object> claims) {
+        return Jwts.builder()
+                .claims(claims)
+                .subject(username)
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(expiration().getTime() + 1209600000))
+                .signWith(getKey())
+                .compact();
+    }
+
+    public String generateRefreshToken(UserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
+
+        return createRefreshToken(userDetails.getUsername(), claims);
+    }
 }

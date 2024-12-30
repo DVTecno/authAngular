@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class OpenAIServiceImpl implements IOpenAIService {
-    
+
     private final VectorStore vectorStore;
     public OpenAIServiceImpl(VectorStore vectorStore) {
         this.vectorStore = vectorStore;
