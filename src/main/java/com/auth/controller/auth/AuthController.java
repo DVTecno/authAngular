@@ -31,7 +31,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDto> register (@Valid @RequestBody RegisterRequestDto dto) {
         AuthResponseDto response = authService.register(dto);
-        //emailService.sendAccountActivationEmail(dto.getEmail());
+        emailService.sendAccountActivationEmail(dto.getEmail());
         return ResponseEntity.status(201).body(response);
     }
 
@@ -51,7 +51,7 @@ public class AuthController {
 
     @PostMapping("/generate-token")
     public ResponseEntity<String> generateActivationToken(@RequestBody @Valid EmailRequestDto emailRequestDto) {
-        //emailService.sendAccountActivationEmail(emailRequestDto.email());
+        emailService.sendAccountActivationEmail(emailRequestDto.email());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Token de activación generado y enviado al correo.");
     }
