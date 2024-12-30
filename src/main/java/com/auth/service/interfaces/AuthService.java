@@ -14,4 +14,5 @@ public interface AuthService {
     User getUserById(UUID userId);
     void activateAccount(String token);
     String generateActivationToken(String email);
+    AuthResponseDto refreshToken(String refreshToken);
 }

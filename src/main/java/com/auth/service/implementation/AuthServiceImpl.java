@@ -196,4 +196,9 @@ public class AuthServiceImpl implements AuthService {
         }
         return new TokenValidationResponseDTO("Token válido. Puede proceder a restablecer su contraseña.");
     }
+
+    @Override
+    public AuthResponseDto refreshToken(String refreshToken) {
+        return null;
+    }
 }

@@ -3,6 +3,7 @@ package com.auth.controller.auth;
 import com.auth.config.CurrentUser;
 import com.auth.dto.request.auth.EmailRequestDto;
 import com.auth.dto.request.auth.LoginRequestDto;
+import com.auth.dto.request.auth.RefreshTokenRequest;
 import com.auth.dto.request.auth.RegisterRequestDto;
 import com.auth.dto.response.auth.AuthResponseDto;
 import com.auth.model.User;
@@ -54,5 +55,10 @@ public class AuthController {
         emailService.sendAccountActivationEmail(emailRequestDto.email());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Token de activación generado y enviado al correo.");
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<AuthResponseDto> refreshToken(@RequestBody @Valid RefreshTokenRequest request)  {
+        return ResponseEntity.ok(authService.refreshToken(request.refreshToken()));
     }
 }
