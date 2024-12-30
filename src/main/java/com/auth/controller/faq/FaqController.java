@@ -1,4 +1,4 @@
-package com.auth.controller.auth.faq;
+package com.auth.controller.faq;
 
 import com.auth.service.interfaces.IOpenAIService;
 import org.springframework.http.ResponseEntity;

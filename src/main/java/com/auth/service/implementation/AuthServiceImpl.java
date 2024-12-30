@@ -7,10 +7,7 @@ import com.auth.dto.request.auth.RegisterRequestDto;
 import com.auth.dto.response.TokenValidationResponseDTO;
 import com.auth.dto.response.auth.AuthResponseDto;
 import com.auth.dto.response.auth.UserResponseDto;
-import com.auth.exception.AccountActivationException;
-import com.auth.exception.BadRequestException;
-import com.auth.exception.EmailServiceException;
-import com.auth.exception.NotFoundException;
+import com.auth.exception.*;
 import com.auth.model.Role;
 import com.auth.model.User;
 import com.auth.repository.IRoleRepository;
@@ -197,8 +194,28 @@ public class AuthServiceImpl implements AuthService {
         return new TokenValidationResponseDTO("Token válido. Puede proceder a restablecer su contraseña.");
     }
 
+    @Transactional
     @Override
     public AuthResponseDto refreshToken(String refreshToken) {
-        return null;
+        if (!jwtService.isTokenExpired(refreshToken)) {
+            throw new TokenExpiredException("El token de refresco ha expirado.", null);
+        }
+
+        String username = jwtService.getUsernameFromToken(refreshToken);
+
+        User user = userRepository.findUserByEmail(username)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado con el correo: " + username));
+
+        if (!refreshToken.equals(user.getRefreshToken())) {
+            throw new InvalidTokenException("El token de refresco no coincide.", null);
+        }
+
+        String newToken = jwtService.generateToken(user);
+        String newRefreshToken = jwtService.generateRefreshToken(user);
+
+        user.setRefreshToken(newRefreshToken);
+        userRepository.save(user);
+
+        return new AuthResponseDto(mapper.toUserResponseDTO(user), newToken, newRefreshToken);
     }
 }

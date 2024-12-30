@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers(PUBLIC_ENDPOINTS_WHITELIST).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/auth/check-login").hasAnyRole("COMPRADOR", "INVERSOR", "ADMIN")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/auth/refresh-token").authenticated()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
