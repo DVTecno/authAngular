@@ -218,4 +218,16 @@ public class AuthServiceImpl implements AuthService {
 
         return new AuthResponseDto(mapper.toUserResponseDTO(user), newToken, newRefreshToken);
     }
+
+    @Transactional
+    @Override
+    public void logout(String refreshToken) {
+        String username = jwtService.getUsernameFromToken(refreshToken);
+
+        User user = userRepository.findUserByEmail(username)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado con el correo: " + username));
+
+        user.setRefreshToken(null);
+        userRepository.save(user);
+    }
 }
