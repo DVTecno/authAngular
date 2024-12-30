@@ -45,7 +45,7 @@ public class AuthController {
     public ResponseEntity<Void> activateAccount(@RequestParam("token") String token) {
         authService.activateAccount(token);
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("http://localhost:8090/auth"))
+                .location(URI.create("https://login-clase.up.railway.app/dashboard"))
                 .build();
     }
 

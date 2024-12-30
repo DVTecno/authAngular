@@ -18,6 +18,7 @@ import com.auth.repository.IRoleRepository;
 import com.auth.repository.IUserRepository;
 import com.auth.service.interfaces.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,6 +31,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -104,7 +106,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findUserByEmail(username)
                 .orElseThrow(() -> new AccountActivationException("No se encontró un usuario con el correo: " + username));
         if (Boolean.TRUE.equals(user.getActive())) {
-            throw new AccountActivationException("La cuenta ya está activada.");
+            log.info("User {} already activated", username);
         }
         user.setActive(true);
         userRepository.save(user);
@@ -120,9 +122,6 @@ public class AuthServiceImpl implements AuthService {
 
     private AuthResponseDto generateResponse(User user) {
         UserResponseDto userR = mapper.toUserResponseDTO(user);
-        Set<RoleResponseDto> roles = user.getRoles().stream()
-                .map(r-> new RoleResponseDto(r.getRoleId(),r.getName()))
-                .collect(Collectors.toSet());
 
         String token = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
@@ -130,7 +129,7 @@ public class AuthServiceImpl implements AuthService {
         user.setRefreshToken(refreshToken);
         userRepository.save(user);
 
-        return new AuthResponseDto(userR,token);
+        return new AuthResponseDto(userR,token, refreshToken);
     }
 
     public Optional<String> getUserNameByEmail(String email) {
