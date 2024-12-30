@@ -61,7 +61,7 @@ public class AuthController {
     public ResponseEntity<AuthResponseDto> refreshToken(@RequestBody @Valid RefreshTokenRequest request)  {
         return ResponseEntity.ok(authService.refreshToken(request.refreshToken()));
     }
-    
+
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@RequestHeader("Authorization") String accessToken, @RequestBody @Valid RefreshTokenRequest request) {
         String token = accessToken.substring(7);
