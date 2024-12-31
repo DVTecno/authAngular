@@ -9,4 +9,3 @@ public class TokenProcessingException extends RuntimeException {
         super(message, cause);
     }
 }
-
