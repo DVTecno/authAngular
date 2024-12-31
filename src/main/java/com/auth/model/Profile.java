@@ -71,5 +71,4 @@ public class Profile extends Auditable {
 
     @Column(name = "landline_phone")
     private String landlinePhone;
-
 }
