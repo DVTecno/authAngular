@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Setter
 @Getter
 @AllArgsConstructor
@@ -17,7 +16,6 @@ public class LoginRequestDto {
     @Email(message = "invalid email entered")
     @NotBlank(message = "Email must be required")
     private String email;
-
     @NotBlank(message = "Password cannot be empty")
     @Pattern(
             regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
