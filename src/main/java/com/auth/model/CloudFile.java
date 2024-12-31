@@ -33,5 +33,4 @@ public class CloudFile {
         this.url = url;
         this.originalFilename = originalFilename;
     }
-
 }
