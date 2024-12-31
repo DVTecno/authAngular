@@ -13,8 +13,7 @@ import java.util.List;
 public interface IGenericRepository<E extends Auditable,T> extends JpaRepository<E,T> {
     @Query(value = "SELECT e FROM #{#entityName} e WHERE e.deleted = false")
     List<E> findAllActive();
-
-
+    
     @Query(value = "SELECT e FROM #{#entityName} e WHERE e.deleted = false " +
             "ORDER BY e.createdAt DESC")
     List<E> findAllActiveOrderByCreatedDate();
