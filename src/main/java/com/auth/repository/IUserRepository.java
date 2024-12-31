@@ -18,5 +18,4 @@ public interface IUserRepository extends JpaRepository<User, UUID> {
     Optional<User> findUserByDni(@Param("dni") String dni);
 
     Optional<User> findByResetPasswordToken(String resetPasswordToken);
-
 }
