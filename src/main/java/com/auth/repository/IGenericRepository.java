@@ -19,7 +19,6 @@ public interface IGenericRepository<E extends Auditable,T> extends JpaRepository
             "ORDER BY e.createdAt DESC")
     List<E> findAllActiveOrderByCreatedDate();
 
-
     @Modifying
     @Query(value = "UPDATE #{#entityName} e " +
             "SET e.deleted = true, " +
