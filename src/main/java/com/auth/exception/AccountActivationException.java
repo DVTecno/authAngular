@@ -5,4 +5,3 @@ public class AccountActivationException extends RuntimeException {
         super(message);
     }
 }
-
