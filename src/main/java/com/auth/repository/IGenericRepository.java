@@ -28,4 +28,3 @@ public interface IGenericRepository<E extends Auditable,T> extends JpaRepository
             "WHERE e.id = :id")
     void softDelete(@Param("id") T id, @Param("username") String username);
 }
-
