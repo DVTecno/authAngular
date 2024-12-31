@@ -11,6 +11,7 @@ import com.auth.service.interfaces.AuthService;
 import com.auth.service.interfaces.IEmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ import java.net.URI;
 public class AuthController {
     private final IEmailService emailService;
     private final AuthService authService;
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDto> login (@Valid @RequestBody LoginRequestDto dto) {
@@ -46,7 +49,7 @@ public class AuthController {
     public ResponseEntity<Void> activateAccount(@RequestParam("token") String token) {
         authService.activateAccount(token);
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create("https://login-clase.up.railway.app/dashboard"))
+                .location(URI.create(frontendUrl + "/dashboard"))
                 .build();
     }
 
