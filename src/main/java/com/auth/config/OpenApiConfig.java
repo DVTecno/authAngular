@@ -31,7 +31,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         ),
         servers = {
                 @Server(description = "Development Server", url = "http://localhost:8090"),
-                @Server(description = "Production Server", url = "https://login-clase.up.railway.app")
+                @Server(description = "Production Server", url = "https://authangular-production.up.railway.app")
         },
         security = @SecurityRequirement(name = "bearerAuth")
 )
@@ -62,4 +62,3 @@ public class OpenApiConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/openapi/");
     }
 }
-
