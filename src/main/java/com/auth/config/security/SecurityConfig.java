@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private static final String[] PUBLIC_ENDPOINTS_WHITELIST = {
-            "/api/auth/login",
+            "/api/auth/log-in",
             "/api/auth/signup",
             "/api/reset-password",
             "/api/forgot-password",
