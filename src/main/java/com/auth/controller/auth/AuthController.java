@@ -32,7 +32,7 @@ public class AuthController {
         return ResponseEntity.ok().body(authService.login(dto));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/signup")
     public ResponseEntity<AuthResponseDto> register (@Valid @RequestBody RegisterRequestDto dto) {
         AuthResponseDto response = authService.register(dto);
         emailService.sendAccountActivationEmail(dto.getEmail());

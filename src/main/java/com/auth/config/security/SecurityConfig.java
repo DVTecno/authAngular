@@ -26,7 +26,7 @@ import java.util.List;
 public class SecurityConfig {
     private static final String[] PUBLIC_ENDPOINTS_WHITELIST = {
             "/api/auth/login",
-            "/api/auth/register",
+            "/api/auth/signup",
             "/api/reset-password",
             "/api/forgot-password",
             "/api/reset-password",
@@ -61,12 +61,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("http://localhost:4200", configuration);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }
