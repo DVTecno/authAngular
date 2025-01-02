@@ -27,7 +27,7 @@ public class AuthController {
     @Value("${frontend.url}")
     private String frontendUrl;
 
-    @PostMapping("/login")
+    @PostMapping("/log-in")
     public ResponseEntity<AuthResponseDto> login (@Valid @RequestBody LoginRequestDto dto) {
         return ResponseEntity.ok().body(authService.login(dto));
     }
