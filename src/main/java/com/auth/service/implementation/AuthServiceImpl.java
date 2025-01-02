@@ -63,15 +63,15 @@ public class AuthServiceImpl implements AuthService {
     public AuthResponseDto register(RegisterRequestDto dto) {
         Optional<User> userFound = userRepository.findUserByEmail(dto.getEmail());
         if(userFound.isPresent()) throw new BadRequestException(String.format("Email is already registered: %s",dto.getEmail()));
-        userFound = userRepository.findUserByDni(dto.getDni());
-        if(userFound.isPresent()) throw new BadRequestException(String.format("dni is already registered: %s",dto.getDni()));
+//        userFound = userRepository.findUserByDni(dto.getDni());
+//        if(userFound.isPresent()) throw new BadRequestException(String.format("dni is already registered: %s",dto.getDni()));
         String roleName = dto.getUserType() ? "ROLE_COMPRADOR" : "ROLE_INVERSOR";
         Role role = roleRepository.findRoleByName(roleName).orElseThrow(() -> new NotFoundException(String.format("Role not found with name %s",roleName)));
 
         User newUser = new User();
         newUser.setEmail(dto.getEmail());
         newUser.setPassword(passwordEncoder.encode(dto.getPassword()));
-        newUser.setDni(dto.getDni().toUpperCase());
+//        newUser.setDni(dto.getDni().toUpperCase());
 //        newUser.setName(dto.getName());
 //        newUser.setLastname(dto.getLastname());
         newUser.getRoles().add(role);
@@ -133,7 +133,7 @@ public class AuthServiceImpl implements AuthService {
         Optional<User> userOptional = userRepository.findUserByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            return Optional.ofNullable(user.getName());
+            return Optional.ofNullable(user.getEmail());
         }
         return Optional.empty();
     }

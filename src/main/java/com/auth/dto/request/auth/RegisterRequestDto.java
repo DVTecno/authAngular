@@ -35,8 +35,8 @@ public class RegisterRequestDto {
 //    @Size(min = 1, max = 30, message = "Min length is 8, Max length is 30")
 //    private String lastname;
 
-    @NotBlank
-    @Pattern(regexp = "^[0-9A-Za-z]{8,9}$", message = "El DNI debe tener entre 8 y 9 caracteres, que pueden ser dígitos o letras (A-Z, a-z).")
-    private String dni;
-    private Boolean userType;
+//    @NotBlank
+//    @Pattern(regexp = "^[0-9A-Za-z]{8,9}$", message = "El DNI debe tener entre 8 y 9 caracteres, que pueden ser dígitos o letras (A-Z, a-z).")
+//    private String dni;
+    private Boolean userType = false;
 }
