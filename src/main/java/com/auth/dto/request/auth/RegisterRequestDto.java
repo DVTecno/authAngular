@@ -19,21 +19,21 @@ public class RegisterRequestDto {
     )
     private String password;
 
-    @NotBlank(message = "Password confirmation cannot be empty")
-    private String confirmPassword;
+//    @NotBlank(message = "Password confirmation cannot be empty")
+//    private String confirmPassword;
+//
+//    @AssertTrue(message = "Passwords do not match")
+//    private boolean isValidPassword() {
+//        return password != null && password.equals(confirmPassword);
+//    }
 
-    @AssertTrue(message = "Passwords do not match")
-    private boolean isValidPassword() {
-        return password != null && password.equals(confirmPassword);
-    }
-
-    @NotBlank(message = "name must be required")
-    @Size(min = 1, max = 30, message = "Min length is 8, Max length is 30")
-    private String name;
-
-    @NotBlank(message = "name must be required")
-    @Size(min = 1, max = 30, message = "Min length is 8, Max length is 30")
-    private String lastname;
+//    @NotBlank(message = "name must be required")
+//    @Size(min = 1, max = 30, message = "Min length is 8, Max length is 30")
+//    private String name;
+//
+//    @NotBlank(message = "name must be required")
+//    @Size(min = 1, max = 30, message = "Min length is 8, Max length is 30")
+//    private String lastname;
 
     @NotBlank
     @Pattern(regexp = "^[0-9A-Za-z]{8,9}$", message = "El DNI debe tener entre 8 y 9 caracteres, que pueden ser dígitos o letras (A-Z, a-z).")
